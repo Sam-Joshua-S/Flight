@@ -2,12 +2,14 @@ from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 from sqlalchemy import func
+import os
+
 
 app = Flask(__name__)
 app.secret_key = "SamJoshua"  # Set your secret key for session management
 
-# Configure PostgreSQL
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://samjoshua:oYsCZkCLjHBKaVzwMFldCqcRQete1yKd@dpg-cij8f215rnut2sbceppg-a.oregon-postgres.render.com/flight_jqwj'
+db_uri = os.getenv('DATABASE_URI')  # Fetch the database URI from environment variables
+app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
 db = SQLAlchemy(app)
 
 # Define the models
