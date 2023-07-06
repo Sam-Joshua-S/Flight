@@ -1,6 +1,5 @@
-Certainly! Here's the README file in markdown format:
 
-```
+
 # Flight Booking System
 
 Welcome to the Flight Booking System repository! This application allows users to search for flights, book tickets, and manage their bookings. It also provides an administrative interface for managing flights and employee accounts.
@@ -17,7 +16,7 @@ Welcome to the Flight Booking System repository! This application allows users t
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/your-username/flight-booking-system.git
+   git clone [https://github.com/your-username/flight-booking-system.git](https://github.com/Sam-Joshua-S/Flight)
    ```
 
 2. Change into the project directory:
