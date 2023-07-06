@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 19%;
+            padding: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 10%;
+            margin-top: 10px;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        .left-padd{
+            margin-left: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <h1> Book Ticket</h1>
+    <div class="left-padd">
+    <p>Flight Number: {{ flight.flight_number }}</p>
+    <p>Departure Time: {{ flight.departure_time }}</p>
+    <p>Total Seats: {{ flight.total_seats }}</p>
+    <p>Available Seats: {{ flight.available_seats }}</p>
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+
+    
+    <form method="POST" action="{{ url_for('book_flight', flight_id=flight.id) }}">
+        <p>Book Tickets</p>
+        <input type="number" id="num_tickets" name="num_tickets" min="1" max="{{ flight.available_seats }}" required><br>
+
+        <input type="submit" value="Book">
+    </form>
+</div>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

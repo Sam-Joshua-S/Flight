@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 40px;
+        }
+
+        form {
+            margin-bottom: 40px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"],
+        input[type="number"] {
+            /* width: 10%; */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+            button {
+                background-color: #4CAF50;
+                color: #fff;
+                padding: 8px 12px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-right: 5px;
+            }
+
+        form.inline-form {
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
+
+        a.logout-link {
+            display: block;
+            text-align: right;
+            margin-top: 20px;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .right{
+            float: right;
+        }
+        .red{
+            background-color: #f44336; /* Red */
+        color: #fff;
+        }
+        .blue{
+            background-color: #2196F3; /* Blue */
+        color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <a href="{{ url_for('create_flight') }}" ><button class="right">Create New Flight</button></a>
+
+
+    <h2>Existing Flights</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Flight Number</th>
+            <th>Departure Time</th>
+            <th>Arrival Name</th>
+            <th>Departure Name</th>
+            <th>Total Seats</th>
+            <th>Available Seats</th>
+            <th>Actions</th>
+        </tr>
+        {% for flight in flights %}
+        <tr>
+            <td>{{ flight.id }}</td>
+            <td>{{ flight.flight_number }}</td>
+            <td>{{ flight.departure_time }}</td>
+            <td>{{ flight.arrival_name }}</td>
+            <td>{{ flight.departure_name }}</td>
+            <td>{{ flight.total_seats }}</td>
+            <td>{{ flight.available_seats }}</td>
+            <td>
+                <a href="{{ url_for('get_flight', flight_id=flight.id) }}"><button>Get Info</button></a>
+                <a href="{{ url_for('edit_flight', flight_id=flight.id) }}"><button class="blue">Edit</button></a>
+                <form class="inline-form" method="POST" action="{{ url_for('delete_flight', flight_id=flight.id) }}">
+                    <button type="submit" class="red">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a class="logout-link" href="{{ url_for('logout') }}" ><button class="red">Logout</button></a>
+</body>
+</html>

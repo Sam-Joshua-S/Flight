@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="date"] {
+            padding: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+
+        p {
+            color: #888;
+        }
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+            float:right;
+        }
+        .no-flights {
+            font-style: italic;
+        }
+        .red{
+            background-color: #f44336; /* Red */
+        color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h2>Flight Search</h2>
+    <a href="/dashboard/user"><button>View Your Purchases</button></a>
+
+    <form method="POST" action="/dashboard">
+        <label for="date">Select Date:</label>
+        <input type="date" id="date" name="date" required><br><br>
+        <input type="submit" value="Search">
+    </form>
+
+    {% if flights %}
+        <h2>Available Flights</h2>
+        <table>
+            <tr>
+                <th>Flight Number</th>
+                <th>Departure Time</th>
+                <th>Arrival Name</th>
+                <th>Departure Name</th>
+                <th>Total Seats</th>
+                <th>Available Seats</th>
+                <th>Book Tickets</th>
+            </tr>
+            {% for flight in flights %}
+                <tr>
+                    <td>{{ flight.flight_number }}</td>
+                    <td>{{ flight.departure_time }}</td>
+                    <td>{{ flight.arrival_name }}</td>
+                    <td>{{ flight.departure_name }}</td>
+                    <td>{{ flight.total_seats }}</td>
+                    <td>{{ flight.available_seats }}</td>
+                    <td>
+                        <a href="/book_flight/{{ flight.id }}">Book Now</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+    {% else %}
+        <p class="no-flights">No flights available</p>
+    {% endif %}
+
+    <br>
+    <a class="logout-link" href="{{ url_for('logout') }}" ><button class="red">Logout</button></a>
+
+</body>
+</html>

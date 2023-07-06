@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+
+        p {
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h2>User Dashboard</h2>
+
+    {% if bookings %}
+        <h2>Your Purchases</h2>
+        <table>
+            <tr>
+                <th>Flight Number</th>
+                <th>Departure Time</th>
+                <th>Arrival Name</th>
+                <th>Departure Name</th>
+                <th>No. of Tickets</th>
+            </tr>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.flight.flight_number }}</td>
+                    <td>{{ booking.flight.departure_time }}</td>
+                    <td>{{ booking.flight.arrival_name }}</td>
+                    <td>{{ booking.flight.departure_name }}</td>
+                    <td>{{ booking.no_of_ticket }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No purchases available</p>
+    {% endif %}
+
+    <br>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Flight</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Flight</h1>
+
+    <form method="POST" action="/admin/edit_flight/{{ flight.id }}">
+        <label for="flight_number">Flight Number:</label>
+        <input type="text" id="flight_number" name="flight_number" value="{{ flight.flight_number }}" required>
+    
+        <label for="departure_time">Departure Time:</label>
+        <input type="datetime-local" id="departure_time" name="departure_time" value="{{ flight.departure_time.strftime('%Y-%m-%dT%H:%M') }}" required>
+    
+        <label for="total_seats">Total Seats:</label>
+        <input type="number" id="total_seats" name="total_seats" value="{{ flight.total_seats }}" required>
+    
+        <label for="available_seats">Available Seats:</label>
+        <input type="number" id="available_seats" name="available_seats" value="{{ flight.available_seats }}" required>
+    
+        <label for="arrival_name">Arrival Name:</label>
+        <input type="text" id="arrival_name" name="arrival_name" value="{{ flight.arrival_name }}" required>
+    
+        <label for="departure_name">Departure Name:</label>
+        <input type="text" id="departure_name" name="departure_name" value="{{ flight.departure_name }}" required>
+    
+        <input type="submit" value="Update">
+    </form>
+    
+    <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+</body>
+</html>
