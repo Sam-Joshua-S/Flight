@@ -241,7 +241,7 @@ def admin_dashboard():
         flight_number = request.form['flight_number']
         departure_time = request.form['departure_time']
         total_seats = request.form['total_seats']
-        available_seats = request.form['available_seats']
+        available_seats = total_seats
         arrival_name = request.form['arrival_name']
         departure_name = request.form['departure_name']
 
